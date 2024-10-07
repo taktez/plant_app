@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:plant/screens/home_page.dart';
+import 'package:plant/screens/root.dart';
+import 'package:plant/screens/splash_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: [
         Locale("fa", "IR"),
       ],
-      home: HomePage(),
+      home: RootPage(),
     );
   }
 }

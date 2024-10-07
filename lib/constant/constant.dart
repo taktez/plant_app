@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Constant {
+  static Color scaffoldAppBarColor = Colors.white;
   static Color primaryColor = Colors.green;
   static Color hintText = Colors.grey;
   static String titleOne = "گیاهان رو بهتر از قبل درک کن";

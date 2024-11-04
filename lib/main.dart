@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:plant/screens/root.dart';
-import 'package:plant/screens/splash_page.dart';
+import 'package:torch_controller/torch_controller.dart';
+// import 'package:plant/screens/splash_page.dart';
 
 void main() {
+  TorchController().initialize();
   runApp(const MyApp());
 }
 

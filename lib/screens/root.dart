@@ -2,6 +2,7 @@ import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.da
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:plant/constant/constant.dart';
+import 'package:plant/models/models.dart';
 import 'package:plant/screens/cart_page.dart';
 import 'package:plant/screens/favorite_page.dart';
 import 'package:plant/screens/home_page.dart';
@@ -18,12 +19,17 @@ class RootPage extends StatefulWidget {
 class _RootPageState extends State<RootPage> {
   int bottomIndex = 0;
 
-  List<Widget> Page = const [
-    HomePage(),
-    FavoritePage(),
-    CartPage(),
-    ProfilePage(),
-  ];
+  List<Plant> favorites = [];
+  List<Plant> myCard = [];
+
+  List<Widget> Page() {
+    return [
+      const HomePage(),
+      FavoritePage(favoritPlant: favorites),
+      CartPage(addToCardPlant: myCard),
+      const ProfilePage(),
+    ];
+  }
 
   List<IconData> iconList = [
     Icons.home,
@@ -42,10 +48,11 @@ class _RootPageState extends State<RootPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        surfaceTintColor: Colors.white,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0.0,
         title: Padding(
-          padding: const EdgeInsets.only(top: 30.0),
+          padding: const EdgeInsets.only(top: 15.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -63,7 +70,7 @@ class _RootPageState extends State<RootPage> {
       ),
       body: IndexedStack(
         index: bottomIndex,
-        children: Page,
+        children: Page(),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -94,6 +101,12 @@ class _RootPageState extends State<RootPage> {
         onTap: (index) {
           setState(() {
             bottomIndex = index;
+
+            final List<Plant> favoritedPlants = Plant.getFavoritedPlants();
+            final List<Plant> addedToCardPlants = Plant.addedToCartPlants();
+
+            favorites = favoritedPlants.toSet().toList();
+            myCard = addedToCardPlants.toSet().toList();
           });
         },
       ),
